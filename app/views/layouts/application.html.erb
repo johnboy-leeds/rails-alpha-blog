@@ -7,11 +7,19 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>  
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100 bg-secondary bg-gradient">
+
+    <%= render 'layouts/navigation' %>
     <%= render 'layouts/messages' %>
 
-    <%= yield %>
+    <div class="flex-grow-1">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

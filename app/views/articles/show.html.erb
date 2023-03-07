@@ -1,7 +1,26 @@
-<h1>Showing article <%= @article.title %></h1>
-
-<p><%= @article.description %></p>
-
-<%= link_to 'Back to list', articles_path %> |
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= button_to 'Delete', article_path(@article), method: :delete, onclick: "return confirm('Are you sure?')" %>
+<div class="container-sm mb-4">
+  <h1 class="text-center mt-4 mb-4"><%= @article.title %></h1>
+  <div class="row justify-content-md-center">
+    <div class="col-8 mt-4">
+      <div class="card text-center shadow ">
+        <div class="card-header fst-italic">by John</div>
+        <div class="card-body">
+          <div class="card-text text-start"><%= simple_format(@article.description) %></div>
+          <%= link_to "Edit", edit_article_path(@article), class:"btn btn-outline-info" %>
+          <%= button_to "Delete", article_path(@article), method: :delete, class:"btn btn-outline-danger", onclick: "return confirm('Are you sure?')", form: { class: "d-inline"} %>
+        </div>
+        <div class="card-footer text-muted">
+          <small>
+            Created <%= time_ago_in_words(@article.created_at) %> ago
+            <% unless @article.created_at == @article.updated_at %>
+              | edited <%= time_ago_in_words(@article.updated_at) %> ago
+            <% end %>
+          </small>      
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <%= link_to 'Cancel and return to articles listing', articles_path, class: "text-primary " %>
+  </div>  
+</div>
